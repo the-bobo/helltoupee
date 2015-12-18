@@ -1,11 +1,15 @@
-Metaphor-a-Minute!
+@realHellToupee
 ==========
+
+Code forked from https://github.com/dariusk/metaphor-a-minute. Thanks Darius!
+
+You can build your own twitter bot by taking this code and modifying it.
 
 Requires [node](http://nodejs.org/) and [npm](http://npmjs.org/). You also need a Twitter App access token, consumer key, and associated secrets: https://dev.twitter.com/apps/new
 
-Finally, you need a Wordnik API key, which you can apply for here: http://developer.wordnik.com/
+(You'll need to add all that info to helltoupee.js before running the program. Don't worry - code is commented.)
 
-(You'll need to add all that info to metaphor.js before running the program, otherwise Wordnik and Twitter won't play nice. Don't worry, it's all commented.)
+Instead of putting the secrets into helltoupee.js directly (don't upload your secretes to github!) I used *fs* (part of the core Node.js API) to read these in from files in the same local directory as helltoupee.js.
 
 > npm install node-restclient@0.0.1
 
@@ -13,4 +17,4 @@ Finally, you need a Wordnik API key, which you can apply for here: http://develo
 
 > npm install express@2.5.9
 
-> node metaphor.js
+> node helltoupee.js

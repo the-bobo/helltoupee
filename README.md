@@ -1,7 +1,9 @@
 @realHellToupee
 ==========
 
-Code forked from https://github.com/dariusk/metaphor-a-minute. Thanks Darius!
+A proud first release from artist Sofa King Awesome.
+
+Code inspired by https://github.com/dariusk/metaphor-a-minute. Thanks Darius!
 
 You can build your own twitter bot by taking this code and modifying it.
 

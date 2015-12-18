@@ -1,6 +1,7 @@
 var restclient = require('node-restclient');
 var Twit = require('twit');
 var app = require('express').createServer();
+var fs = require('fs');
 
 // I deployed to Nodejitsu, which requires an application to respond to HTTP requests
 // If you're running locally you don't need this, or express at all.
@@ -9,13 +10,56 @@ app.get('/', function(req, res){
 });
 app.listen(3000);
 
-// insert your twitter app info here
+// declare variables to hold twitter app secrets
+var consumer_key;
+var consumer_secret;
+var access_token;
+var access_token_secret;
+
+// scrub twitter app secrets from local utf8 text files
+// file pathing done for OSX / Linux, may need to change for Windows
+// perhaps using the path module in Node.js could make this cross-platform easier
+
+fs.readFile('./consumerkey.txt', 'utf8', function(err, data){
+  if (err){
+    console.log(err);
+    process.exit(1);
+  }
+  consumer_key = data;
+})
+
+fs.readFile('./consumersecret.txt', 'utf8', function(err, data){
+  if (err){
+    console.log(err);
+    process.exit(1);
+  }
+  consumer_secret = data;
+})
+
+fs.readFile('./accesstoken.txt', 'utf8', function(err, data){
+  if (err){
+    console.log(err);
+    process.exit(1);
+  }
+  access_token = data;
+})
+
+fs.readFile('./accesstokensecret.txt', 'utf8', function(err, data){
+  if (err){
+    console.log(err);
+    process.exit(1);
+  }
+  access_token_secret = data;
+})
+
+// insert the twitter app secrets
 var T = new Twit({
-  consumer_key:         '', 
-  consumer_secret:      '',
-  access_token:         '',
-  access_token_secret:  ''
+  consumer_key: consumer_key, 
+  consumer_secret: consumer_secret,
+  access_token: access_token,
+  access_token_secret: access_token_secret
 });
+
 
 var statement =   "";
 

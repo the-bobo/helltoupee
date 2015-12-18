@@ -60,6 +60,12 @@ var T = new Twit({
   access_token_secret: access_token_secret
 });
 
+T.get('search/tweets', { q: 'banana since:2011-11-11', count: 100 }, function(err, data, response) {
+  console.log(data);
+});
+
+
+/*
 
 var statement =   "";
 
@@ -183,3 +189,4 @@ setInterval(function() {
     console.log(e);
   }
 },60000*60*5);
+*/

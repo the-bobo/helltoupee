@@ -68,11 +68,18 @@ if(mm<10){
 
 var today = yyyy + '-' + mm + '-' + dd;
 
-
-T.get('search/tweets', { q: '@realDonaldTrump since:' + today, count: 10 }, function(err, data, response) {
+/*
+T.get('search/tweets', { q: '@realDonaldTrump since:' + today, count: 100 }, function(err, data, response) {
   console.log(data);
 });
+*/
 
+//var stream = T.stream('statuses/sample')
+var stream = T.stream('statuses/filter', { track: 'mango' })
+
+stream.on('tweet', function (tweet) {
+  console.log(tweet)
+});
 
 /*
 

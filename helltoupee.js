@@ -1,3 +1,11 @@
+/*
+******************************************************
+* @realHellToupee
+* Built by Sofa King Awesome
+* Notice me senpai!
+******************************************************
+*/
+
 var restclient = require('node-restclient');
 var Twit = require('twit');
 var fs = require('fs');
@@ -16,6 +24,11 @@ app.get('/', function(req, res){
 app.listen(3000);
 */
 
+/*
+******************************************************
+* Initial twitter setup
+******************************************************
+*/
 
 // declare variables to hold twitter app secrets
 // file pathing done for OSX / Linux, may need to change for Windows
@@ -26,6 +39,7 @@ var consumer_secret = fs.readFileSync('./consumersecret.txt', 'utf-8');
 var access_token = fs.readFileSync('./accesstoken.txt', 'utf-8');
 var access_token_secret = fs.readFileSync('./accesstokensecret.txt', 'utf-8');
 
+// setup Twit with our secrets
 var T = new Twit({
   consumer_key: consumer_key, 
   consumer_secret: consumer_secret,
@@ -33,7 +47,29 @@ var T = new Twit({
   access_token_secret: access_token_secret
 });
 
-T.get('search/tweets', { q: 'banana since:2011-11-11', count: 100 }, function(err, data, response) {
+/*
+******************************************************
+* Code we want to refresh every two minutes
+******************************************************
+*/
+
+// scrub today's date
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10){
+  dd='0'+dd
+    } 
+if(mm<10){
+  mm='0'+mm
+    } 
+
+var today = yyyy + '-' + mm + '-' + dd;
+
+
+T.get('search/tweets', { q: '@realDonaldTrump since:' + today, count: 10 }, function(err, data, response) {
   console.log(data);
 });
 

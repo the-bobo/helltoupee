@@ -49,7 +49,7 @@ var T = new Twit({
 
 /*
 ******************************************************
-* Code we want to refresh every two minutes
+* BEGIN two minute refresh loop
 ******************************************************
 */
 
@@ -68,20 +68,82 @@ if(mm<10){
 
 var today = yyyy + '-' + mm + '-' + dd;
 
-/*
+/* REST API search
 T.get('search/tweets', { q: '@realDonaldTrump since:' + today, count: 100 }, function(err, data, response) {
   console.log(data);
 });
 */
 
 //var stream = T.stream('statuses/sample')
-var stream = T.stream('statuses/filter', { track: 'mango' })
+var stream = T.stream('statuses/filter', { track: '@realDonaldTrump' })
 
 stream.on('tweet', function (tweet) {
   console.log(tweet)
 });
 
 /*
+******************************************************
+* regex logic
+******************************************************
+*/
+
+/*
+Types of tweets: https://support.twitter.com/articles/119138?lang=en
+Automation guidelines: https://support.twitter.com/articles/76915?lang=en
+
+samples:
+'Patriot. Love my Country and Flag. \nAnti-Illegal Alien,  Anti-Insider Trading by Elected Officials. Trump 100% Make America Great Again!'
+=> 'Patriot. Love my Country and Flag. \nAnti-Illegal Alien, Anti-Insider Trading by Elected Officials. WhISIS 100% Notice me Senpai!''
+
+'RT @sjh2222: @CindyBlackwel12 @realDonaldTrump MERRY CHRISTMAS!'
+=> 'RT sjh2222: CindyBlackwel12 WhISIS MERRY CHRISTMAS!'
+  - have to strip all @'s to avoid tweeting at someone without their consent
+
+'@realDonaldTrump @JebBush YOU ARE A HORRIBLE PERSON DONALD TRUMP'
+=> 'WhISIS JebBush YOU ARE A HORRIBLE PERSON WhISIS'
+
+'@theblaze @PerezHilton @realDonaldTrump so @theblaze sides with the Far Left in its hatred for @realDonaldTrump'
+=> 'theblaze PerezHilton WhISIS so theblaze sides with the Far Left in its hatred for WhISIS'
+
+this is one from Trump's twitter - maybe should do one of these every so often? every tenth one?:
+'"@officialjtw: @realDonaldTrump You\'re iconic! You are going down in the history books! #trump2016"  So nice, thank you.',
+
+=> '"officialjtw: WhISIS You\'re iconic! You are going down in the history books! #WhISIS2016"  So nice, thank you.',
+  - how are we going to deal with escape characters like: \'   and    \n  ?
+
+want to ignore ones like this - just his screen name and a link - or maybe not:
+'@realDonaldTrump https://t.co/fv3qYDtBM2'
+=> 'WhISIS https://t.co/fv3qYDtBM2'
+
+To do:
+- how do we get the tweet from the stream API?
+- why did the stream API shut down when I started scrolling?
+- how often should we scrub from trump's own twitter account? once every hour? should we signal this tweet as a WhISIS original?
+    (perhaps a tweet before it says "Up next - a WhISIS original!")
+- how will we post the message back to twitter? (REST API?)
+- what should we do if the tweet is too long? (need a safety check for 140 chars)
+
+- how are we going to deal with escape characters like: \'   and    \n  ?
+- have to strip all @'s to avoid tweeting at someone without their consent
+- things to change to WhISIS: 
+      -trump or Trump or TRUMP (anywhere in string, e.g., #trump2016 => #WhISIS2016, #trumptrain => #WhISIStrain)
+      -donald trump or DONALD TRUMP or Donald Trump
+      -Mr. Trump or mr. trump etc. (basically all of these are case insensitive)
+      -the donald or The Donald or the Donald or The donald or THE DONALD
+- things to change to Notice me, Senpai! (all case variations)
+      -make america great again 
+      -make america great (only apply this rule if it is missing 'again')
+      -MakeAmericaGreatAgain 
+      -MakeAmericaGreat (only apply this rule if it is missing 'again')
+
+*/
+
+
+/*
+******************************************************
+* END two minute refresh loop
+******************************************************
+*/
 
 var statement =   "";
 

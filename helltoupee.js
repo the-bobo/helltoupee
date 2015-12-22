@@ -116,9 +116,19 @@ stream.on('tweet', function (tweet) {
     stream.stop(); 
 
     console.log('####################\n####################');
+
+    // strip @'s to avoid non-consensual replies
     var patt = /@/g;
     text = text.replace(patt, '');
-    console.log(text);
+    
+    // replace all trumps (not sure how to replace across a newline, e.g. "This text has Mr. \n Donald Trump")
+    patt = /realDonaldTrump/gi;
+    text = text.replace(patt, 'WhISIS');
+
+    patt = /Mr. Donald Trump/gi;
+    text = text.replace(patt, 'WhISIS');
+
+    
 
     break;
    }

@@ -82,32 +82,60 @@ var tweetText;
 
 stream.on('tweet', function (tweet) {
   var text = tweet['text'];
+  var count = 0;
+  var count2 = 0;
   while (true){
    
    // reject short tweets
    if (text.length < 50){
+    count2++;
+    console.log("skipping b/c short: " + count2 + '\n'); // debug statement
     continue;
    }
-   
-   // test for strings of interest
-   var containsFlag = 0; 
-   containsFlag += text.indexOf('trump') + text.indexOf('Trump') + text.indexOf('donald') + text.indexOf('Donald');
    
    // reject tweets that have hyperlinks
-      if (text.indexOf('http') > -1){
-    containsFlag = 0;
-   }
+   if (text.indexOf('http') > -1){
+      count++;
+      //console.log(text);
+      //console.log("skipping http: " + count + '\n');
+      continue;
+   } 
    
-   if (containsFlag <= 0){  
+   // test for strings of interest
+   var containsFlag = -1; 
+   containsFlag += text.indexOf('trump') + text.indexOf('Trump') + text.indexOf('donald') + text.indexOf('Donald');
+   if (containsFlag < 0){  
     continue;
    }
+
+   // do the word swap
    else{
     console.log('####################\n####################');
-    console.log(tweet['text']);
-    console.log(tweet['text'].length);
+    console.log(text);
+    console.log(text.length);
     stream.stop(); 
+
+    console.log('####################\n####################');
+    var patt = /@/g;
+    text = text.replace(patt, '');
+    console.log(text);
+
     break;
    }
+/*
+   - have to strip all @'s to avoid tweeting at someone without their consent
+- things to change to WhISIS: 
+      -trump or Trump or TRUMP (anywhere in string, e.g., #trump2016 => #WhISIS2016, #trumptrain => #WhISIStrain)
+      -donald trump or DONALD TRUMP or Donald Trump
+      -Mr. Trump or mr. trump etc. (basically all of these are case insensitive)
+      -the donald or The Donald or the Donald or The donald or THE DONALD
+- things to change to Notice me, Senpai! (all case variations)
+      -make america great again 
+      -make america great (only apply this rule if it is missing 'again')
+      -MakeAmericaGreatAgain 
+      -MakeAmericaGreat (only apply this rule if it is missing 'again')
+- maybe change &amp; => '&'
+*/
 
   }
 

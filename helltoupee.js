@@ -53,6 +53,8 @@ var T = new Twit({
 ******************************************************
 */
 
+var flag = 0;
+
 // scrub today's date
 var today = new Date();
 var dd = today.getDate();
@@ -76,10 +78,19 @@ T.get('search/tweets', { q: '@realDonaldTrump since:' + today, count: 100 }, fun
 
 //var stream = T.stream('statuses/sample')
 var stream = T.stream('statuses/filter', { track: '@realDonaldTrump' })
+var tweetText; 
 
 stream.on('tweet', function (tweet) {
-  console.log(tweet)
+  console.log('####################\n####################');
+  console.log(tweet['text']);
+  flag = 1;
 });
+
+
+if (flag === 1){
+  stream.stop();
+}
+
 
 /*
 ******************************************************
@@ -88,8 +99,19 @@ stream.on('tweet', function (tweet) {
 */
 
 /*
+Make this tweet the first one:
+RT @mitchellvii: Trump is the movement.
+The movement is us.
+Trump is us.
+We are voting for ourselves.
+
+@realDonaldTrump
+
 Types of tweets: https://support.twitter.com/articles/119138?lang=en
 Automation guidelines: https://support.twitter.com/articles/76915?lang=en
+Steraming message types: https://dev.twitter.com/streaming/overview/messages-types
+Streaming API request paramters: https://dev.twitter.com/streaming/overview/request-parameters
+Processing streaming messages: https://dev.twitter.com/streaming/overview/processing
 
 samples:
 'Patriot. Love my Country and Flag. \nAnti-Illegal Alien,  Anti-Insider Trading by Elected Officials. Trump 100% Make America Great Again!'
@@ -144,6 +166,12 @@ To do:
 * END two minute refresh loop
 ******************************************************
 */
+
+
+
+
+
+/*
 
 var statement =   "";
 

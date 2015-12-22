@@ -81,16 +81,32 @@ var stream = T.stream('statuses/filter', { track: '@realDonaldTrump' })
 var tweetText; 
 
 stream.on('tweet', function (tweet) {
-  console.log('####################\n####################');
-  console.log(tweet['text']);
-  flag = 1;
+  var text = tweet['text'];
+  while (true){
+   if (text.length < 50){
+    continue;
+   }
+   if (text does not contain trump or any other string of interest){
+    continue;
+   }
+   else{
+    console.log('####################\n####################');
+    console.log(tweet['text']);
+    console.log(tweet['text'].length);
+    stream.stop(); 
+   }
+
+  }
+
 });
 
+//stream.stop();
 
+/*
 if (flag === 1){
   stream.stop();
 }
-
+*/
 
 /*
 ******************************************************
@@ -157,6 +173,10 @@ To do:
       -make america great (only apply this rule if it is missing 'again')
       -MakeAmericaGreatAgain 
       -MakeAmericaGreat (only apply this rule if it is missing 'again')
+- maybe change &amp; => '&'
+- maybe require a minimum number of characters to avoid tweets like this (>=50?): @CNNEE @realDonaldTrump @MissUniverse
+- also need to make sure tweet['text'] actually contains "trump" somewhere, otherwise this result is valid: 
+      RT @jxckhy: Pigs are intelligent creatures don't insult them like that https://t.co/34aHG4836e
 
 */
 

@@ -83,10 +83,22 @@ var tweetText;
 stream.on('tweet', function (tweet) {
   var text = tweet['text'];
   while (true){
+   
+   // reject short tweets
    if (text.length < 50){
     continue;
    }
-   if (text does not contain trump or any other string of interest){
+   
+   // test for strings of interest
+   var containsFlag = 0; 
+   containsFlag += text.indexOf('trump') + text.indexOf('Trump') + text.indexOf('donald') + text.indexOf('Donald');
+   
+   // reject tweets that have hyperlinks
+      if (text.indexOf('http') > -1){
+    containsFlag = 0;
+   }
+   
+   if (containsFlag <= 0){  
     continue;
    }
    else{
@@ -94,6 +106,7 @@ stream.on('tweet', function (tweet) {
     console.log(tweet['text']);
     console.log(tweet['text'].length);
     stream.stop(); 
+    break;
    }
 
   }

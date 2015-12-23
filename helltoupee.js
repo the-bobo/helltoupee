@@ -108,7 +108,7 @@ stream.on('tweet', function (tweet) {
     continue;
    }
 
-   // do the word swap
+   // do the word swap using regex
    else{
     console.log('####################\n####################');
     console.log(text);
@@ -120,15 +120,41 @@ stream.on('tweet', function (tweet) {
     // strip @'s to avoid non-consensual replies
     var patt = /@/g;
     text = text.replace(patt, '');
+
+    // change &amp; to &
+    patt = /&amp;/;
+    text = text.replace(patt, '&');
     
     // replace all trumps (not sure how to replace across a newline, e.g. "This text has Mr. \n Donald Trump")
+    // this list is ordered in precedence
     patt = /realDonaldTrump/gi;
     text = text.replace(patt, 'WhISIS');
 
     patt = /Mr. Donald Trump/gi;
     text = text.replace(patt, 'WhISIS');
 
-    
+    patt = /The Donald/gi;
+    text = text.replace(patt, 'WhISIS');
+
+    patt = /Donald Trump/gi;
+    text = text.replace(patt, 'WhISIS');
+
+    patt = /trump/gi;
+    text = text.replace(patt, 'WhISIS');
+
+    patt = /make america great again/gi;
+    text = text.replace(patt, 'Notice me, Senpai!');
+
+    patt = /make america great/gi;
+    text = text.replace(patt, 'Notice me, Senpai!');
+
+    patt = /MakeAmericaGreatAgain/gi;
+    text = text.replace(patt, 'Notice me, Senpai!');
+
+    patt = /MakeAmericaGreat/gi;
+    text = text.replace(patt, 'Notice me, Senpai!');
+
+    console.log(text);
 
     break;
    }
@@ -195,7 +221,7 @@ samples:
 => 'theblaze PerezHilton WhISIS so theblaze sides with the Far Left in its hatred for WhISIS'
 
 this is one from Trump's twitter - maybe should do one of these every so often? every tenth one?:
-'"@officialjtw: @realDonaldTrump You\'re iconic! You are going down in the history books! #trump2016"  So nice, thank you.',
+'"@officialjtw: @realDonaldTrump You\'re iconic! You are going down in the history books! #trump2016"  So nice, thank you. ',
 
 => '"officialjtw: WhISIS You\'re iconic! You are going down in the history books! #WhISIS2016"  So nice, thank you.',
   - how are we going to deal with escape characters like: \'   and    \n  ?

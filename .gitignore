@@ -1,4 +1,8 @@
+# ignore build artificats for deploy to heroku
 node_modules/
+npm-debug.log
+.DS_Store
+/*.env
 
 # ignore secrets
 consumerkey.txt

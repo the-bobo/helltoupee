@@ -1,0 +1,31 @@
+{
+  "name": "helltoupee",
+  "version": "1.0.0",
+  "description": "twitter.com/realHellToupee",
+  "main": "helltoupee.js",
+  "dependencies": {
+    "express": "^4.13.3",
+    "fs": "^0.0.2",
+    "twit": "^2.1.1"
+  },
+  "engines": {
+    "node": "0.10.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/the-bobo/helltoupee.git"
+  },
+  "keywords": [
+    "trump"
+  ],
+  "author": "Sofa King Awesome",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/the-bobo/helltoupee/issues"
+  },
+  "homepage": "https://github.com/the-bobo/helltoupee#readme"
+}

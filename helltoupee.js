@@ -34,10 +34,18 @@ app.listen(3000);
 // file pathing done for OSX / Linux, may need to change for Windows
 // perhaps using the path module in Node.js could make this cross-platform easier
 
+/* scrub secrets from localstore
 var consumer_key = fs.readFileSync('./consumerkey.txt', 'utf-8');
 var consumer_secret = fs.readFileSync('./consumersecret.txt', 'utf-8');
 var access_token = fs.readFileSync('./accesstoken.txt', 'utf-8');
 var access_token_secret = fs.readFileSync('./accesstokensecret.txt', 'utf-8');
+*/
+
+// scrub secrets from environment variables for cloud deploy
+var consumer_key = process.env.CONSUMERKEY;
+var consumer_secret = process.env.CONSUMERSECRET;
+var access_token = process.env.ACCESSTOKEN;
+var access_token_secret = process.env.ACCESSTOKENSECRET;
 
 // setup Twit with our secrets
 var T = new Twit({

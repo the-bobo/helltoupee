@@ -17,10 +17,19 @@ var http = require('http');
 ******************************************************
 */
 
-setInterval(http.createServer(function (req, res) { 
+function handleRequest (req, res){
   res.writeHead(200, {'Content-Type': 'text/plain'}); 
-  res.send('it is running\n'); 
-}).listen(process.env.PORT || 5000), 60000);
+  res.end('it is running\n'); 
+}
+
+function keepAlive(){
+  http.createServer(handleRequest).listen(process.env.PORT || 5000);
+}
+
+keepAlive();
+setInterval(keepAlive, 60000);
+
+
 
 /*
 http.createServer(function (request, response) {

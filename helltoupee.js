@@ -23,12 +23,14 @@ http.createServer(function (request, response) {
   var filePath = './index.html';
   var contentType = 'text/html';
   var content;
-  fs.readFileSync(filePath, function(error, content) {
-    content = content;
+  fs.readFileSync(filePath, function(error, con) {
+    content = con;
     console.log(error);
-  }
-  response.writeHead(200, { 'Content-Type': contentType });
-  response.end(content, 'utf-8');
+  });
+  //response.writeHead(200, { 'Content-Type': contentType });
+  response.writeHead(200);
+  response.end(content);
+  //response.end(content, 'utf-8');
 
 }).listen(5000);
 

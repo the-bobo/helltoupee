@@ -22,8 +22,6 @@ http.createServer(function (request, response) {
 
   var filePath = './index.html';
   var contentType = 'text/html';
-
-
   response.writeHead(200, { 'Content-Type': contentType });
   response.end(content, 'utf-8');
 

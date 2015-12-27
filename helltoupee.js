@@ -9,20 +9,25 @@
 
 var Twit = require('twit');
 var fs = require('fs');
+var http = require('http');
 
 /*
-var express = require('express');
-var http = require('http');
-var app = require('express');
-//var server = http.createServer(app);
-
-// I deployed to Nodejitsu, which requires an application to respond to HTTP requests
-// If you're running locally you don't need this, or express at all.
-app.get('/', function(req, res){
-    res.send('Hello world.');
-});
-app.listen(3000);
+******************************************************
+* Setting up web frontend for heroku 
+******************************************************
 */
+
+
+http.createServer(function (request, response) {
+
+  var filePath = './index.html';
+  var contentType = 'text/html';
+
+
+  response.writeHead(200, { 'Content-Type': contentType });
+  response.end(content, 'utf-8');
+
+}).listen(5000);
 
 /*
 ******************************************************

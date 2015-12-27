@@ -101,7 +101,7 @@ function harvestTweets(){
     text = text.replace(patt, '');
 
     // change &amp; to &
-    patt = /&amp;/;
+    patt = /&amp;/g;
     text = text.replace(patt, '&');
     
     // replace all trumps (not sure how to replace across a newline, e.g. "This text has Mr. \n Donald Trump")

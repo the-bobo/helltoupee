@@ -4,7 +4,7 @@
   "description": "twitter.com/realHellToupee",
   "main": "helltoupee.js",
   "dependencies": {
-    "fs": "^0.0.2",
+    "fs": "0.0.2",
     "twit": "^2.1.1"
   },
   "engines": {

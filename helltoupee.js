@@ -23,7 +23,7 @@ http.createServer(function (request, response) {
   var filePath = './index.html';
   var contentType = 'text/html';
   var content;
-  fs.readFile(filePath, function(error, content) {
+  fs.readFileSync(filePath, function(error, content) {
     content = content;
     console.log(error);
   }

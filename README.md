@@ -3,7 +3,7 @@
 
 A proud first release from artist Sofa King Awesome, 12.26.2015. https://twitter.com/realHellToupee
 
-You can build your own twitter bot by taking this code and modifying it. See below for details.
+You can build your own twitter bot by taking this code and modifying it. Current version strips `@`'s to avoid accidental retweets. See below for implementation details.
 
 @realHellToupee  
 *2015*  

@@ -104,9 +104,9 @@ function harvestTweets(){
     var shortcount = 0;
 
    // reject short tweets, ask for another
-   if (text.length < 50){
+   if (text.length < 9){
     shortcount++;
-    console.log("skipping b/c short: " + shortcount + '\n'); // debug statement
+    console.log("skipping b/c short: " + shortcount + '\n' + text); // debug statement
     return;
   }
 

@@ -30,7 +30,6 @@ keepAlive();
 setInterval(keepAlive, 60000);
 
 
-
 /*
 // tried to create a rich front page that auto-updated
 // with latest tweets, but this crashed on heroku for whatever reason

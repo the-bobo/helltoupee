@@ -24,7 +24,6 @@ function handleRequest (req, res){
 
 function keepAlive(){
   http.createServer(handleRequest).listen(process.env.PORT || 5000);
-  }
 }
 
 keepAlive();

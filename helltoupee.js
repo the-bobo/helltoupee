@@ -32,6 +32,8 @@ setInterval(keepAlive, 60000);
 
 
 /*
+// tried to create a rich front page that auto-updated
+// with latest tweets, but this crashed on heroku for whatever reason
 http.createServer(function (request, response) {
 
   var filePath = './index.html';
@@ -81,6 +83,7 @@ var T = new Twit({
   access_token_secret: access_token_secret
 });
 var text; // to hold tweet text
+var lastText = ''; // to cache last tweet
 var runCounter = 0; // to measure overall runs
 
 
@@ -118,7 +121,8 @@ function harvestTweets(){
 
    // test for strings of interest
    var containsFlag = -1; 
-   containsFlag += text.indexOf('trump') + text.indexOf('Trump') + text.indexOf('donald') + text.indexOf('Donald');
+   containsFlag += text.indexOf('trump')+1 + text.indexOf('Trump')+1 + text.indexOf('donald')+1 + text.indexOf('Donald')+1;
+   // containsFlag is acting as a logical OR, where a value >= 0 is TRUE
    if (containsFlag < 0){  
     return;
   }
@@ -127,8 +131,15 @@ function harvestTweets(){
       // 'Trump' and all variations => 'WhISIS'
       // 'Make America Great Again' and all variations => 'Notice me, Senpai!'
   else{
+    if (lastText === text){
+      // this tweet is the same as the last one we posted,
+      // ask for another
+      return;
+    }
+    
     console.log('Unedited tweet ' + runCounter + ': ' + text);
     stream.stop(); // shutdown stream API, we've got what we need
+    lastText = text; // cache this tweet
 
     // strip @'s to avoid non-consensual replies
     var patt = /@/g;
@@ -137,6 +148,18 @@ function harvestTweets(){
     // change &amp; to &
     patt = /&amp;/g;
     text = text.replace(patt, '&');
+
+    // change &gt; to >
+    patt = /&gt;/g;
+    text = text.replace(patt, '>')
+
+    // change &lt; to <
+    patt = /&lt;/g;
+    text = text.replace(patt, '<')
+
+    // change &#039 to '
+    patt = /&#039/g;
+    text = text.replace(patt, '\'');
     
     // replace all trumps (not sure how to replace across a newline, e.g. "This text has Mr. \n Donald Trump")
     // this list is ordered in precedence

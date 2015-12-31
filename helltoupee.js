@@ -27,7 +27,9 @@ function keepAlive(){
 }
 
 keepAlive();
-setInterval(keepAlive, 60000);
+
+// for some reason the following line started triggering errors, removing:
+//setInterval(keepAlive, 60000); 
 
 
 /*

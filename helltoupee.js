@@ -22,20 +22,9 @@ function handleRequest (req, res){
   res.end('it is running\n'); 
 }
 
-var isItListening; 
-var server = http.createServer(handleRequest).listen(process.env.PORT || 5000);
-
 function keepAlive(){
-  isItListening = 'false';
-
-  server.on('listening', function(){
-    isItListening = 'true';
-  });
-
-  if (isItListening === 'false'){
-    server = http.createServer(handleRequest).listen(process.env.PORT || 5000);
+  http.createServer(handleRequest).listen(process.env.PORT || 5000);
   }
-
 }
 
 keepAlive();

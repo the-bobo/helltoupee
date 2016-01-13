@@ -9,7 +9,7 @@ You can build your own twitter bot by taking this code and modifying it. Current
 *2015*  
 Sofa King Awesome  
 
-Node.js on Heroku.  
+Node.js.  
 On loan by the artist, to the public.
 
 Inspired by the lovely [Trevor Noah](https://twitter.com/trevornoah) and [Hasan Minhaj](https://twitter.com/hasanminhaj) skit, ["Donald Trump: The White ISIS,"](http://www.cc.com/video-clips/0org9p/the-daily-show-with-trevor-noah-donald-trump--the-white-isis) this twitter bot scans for new tweets mentioning Donald Trump every two minutes. It replaces all instances of `Trump` with `WhISIS` ("why-sis") and `Make America Great Again` with `Notice me, Senapi!`. The resulting retweets are both eerie and comical. An overidentification with racist fascism reminds us of the stakes and twisted sincerity of participants on the one hand, while an overidientification with self-referential meme culture reminds us that the Internet is serious business after all.

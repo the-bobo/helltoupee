@@ -222,9 +222,13 @@ setInterval(harvestTweets, 120000);
 /*
 ******************************************************
 * Favorite RT's of Me (Every 5 hours)
+* Commenting out for now - this needs proper error handling
+* see https://github.com/request/request/issues/636#issuecomment-23030577
+* for the ETIMEDOUT error in net.js
 ******************************************************
 */
 
+/*
 function favRTs () {
   T.get('statuses/retweets_of_me', {}, function (e,r) {
     for(var i=0;i<r.length;i++) {
@@ -243,7 +247,7 @@ setInterval(function() {
     console.log(e);
   }
 },60000*60*5);
-
+*/
 
 
 /*
